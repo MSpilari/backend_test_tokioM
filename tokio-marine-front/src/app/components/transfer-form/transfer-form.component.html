@@ -1,0 +1,86 @@
+<form (ngSubmit)="submit()" #form="ngForm" class="row g-3" novalidate>
+    
+    <!-- Conta de Origem -->
+    <div class="col-md-6">
+      <label for="senderAccount" class="form-label">Conta de Origem</label>
+      <input
+        type="text"
+        id="senderAccount"
+        name="senderAccount"
+        [(ngModel)]="transfer.senderAccount"
+        required
+        minlength="5"
+        class="form-control"
+        placeholder="Digite a conta de origem"
+        #senderAccount="ngModel"
+      />
+      <div *ngIf="senderAccount.invalid && (senderAccount.dirty || senderAccount.touched)" class="text-danger mt-1">
+        <div *ngIf="senderAccount.errors?.['required']">Conta de origem é obrigatória.</div>
+        <div *ngIf="senderAccount.errors?.['minlength']">Mínimo de 5 caracteres.</div>
+      </div>
+    </div>
+
+    <!-- Conta de Destino -->
+    <div class="col-md-6">
+      <label for="destinationAccount" class="form-label">Conta de Destino</label>
+      <input
+        type="text"
+        id="destinationAccount"
+        name="destinationAccount"
+        [(ngModel)]="transfer.destinationAccount"
+        required
+        minlength="5"
+        class="form-control"
+        placeholder="Digite a conta de destino"
+        #destinationAccount="ngModel"
+      />
+      <div *ngIf="destinationAccount.invalid && (destinationAccount.dirty || destinationAccount.touched)" class="text-danger mt-1">
+        <div *ngIf="destinationAccount.errors?.['required']">Conta de destino é obrigatória.</div>
+        <div *ngIf="destinationAccount.errors?.['minlength']">Mínimo de 5 caracteres.</div>
+      </div>
+    </div>
+
+    <!-- Valor -->
+    <div class="col-md-4">
+      <label for="value" class="form-label">Valor</label>
+      <input
+        type="number"
+        id="value"
+        name="value"
+        [(ngModel)]="transfer.value"
+        required
+        min="0.01"
+        class="form-control"
+        placeholder="Valor da transferência"
+        #value="ngModel"
+      />
+      <div *ngIf="value.invalid && (value.dirty || value.touched)" class="text-danger mt-1">
+        <div *ngIf="value.errors?.['required']">Valor é obrigatório.</div>
+        <div *ngIf="value.errors?.['min']">O valor deve ser maior que zero.</div>
+      </div>
+    </div>
+
+    <!-- Data -->
+    <div class="col-md-4">
+      <label for="transferDate" class="form-label">Data da Transferência</label>
+      <input
+        type="date"
+        id="transferDate"
+        name="transferDate"
+        [(ngModel)]="transfer.transferDate"
+        required
+        class="form-control"
+        #transferDate="ngModel"
+      />
+      <div *ngIf="transferDate.invalid && (transferDate.dirty || transferDate.touched)" class="text-danger mt-1">
+        <div *ngIf="transferDate.errors?.['required']">Data da transferência é obrigatória.</div>
+      </div>
+    </div>
+
+    <!-- Botão -->
+    <div class="col-12">
+      <button class="btn btn-primary mt-3" type="submit" [disabled]="form.invalid">
+        Enviar Transferência
+      </button>
+    </div>
+</form>

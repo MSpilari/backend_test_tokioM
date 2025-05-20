@@ -1,0 +1,28 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Conta de Origem</th>
+        <th>Conta de Destino</th>
+        <th>Valor</th>
+        <th>Valor da taxa</th>
+        <th>Total</th>
+        <th>Realizada em</th>
+        <th>Recebida em</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transfer of transfers">
+        <td>{{ transfer.senderAccount }}</td>
+        <td>{{ transfer.destinationAccount }}</td>
+        <td>R$ {{ transfer.value | number:'1.2-2' }}</td>
+        <td>R$ {{ transfer.tax | number:'1.2-2' }}</td>
+        <td>R$ {{ transfer.totalWithTax | number:'1.2-2' }}</td>
+        <td>{{ transfer.scheduleAt | date:'dd/MM/yyyy' }}</td>
+        <td>{{ transfer.transferDate | date:'dd/MM/yyyy' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="transfers.length === 0" class="alert alert-info">
+    Nenhuma transferência registrada.
+  </div>
