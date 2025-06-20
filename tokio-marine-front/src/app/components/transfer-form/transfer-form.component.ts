@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TransferRequest } from '../../models/TransferRequest.model';
 import { TransferService } from '../../services/Transfer.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,15 +18,27 @@ export class TransferFormComponent {
     transferDate: '',
   };
 
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
+
   constructor(private transferService: TransferService) {}
 
-  submit() {
+  submit(form: NgForm) {
     this.transferService.makeTransfer(this.transfer).subscribe({
       next: (res) => {
-        alert(res.Message);
+        this.successMessage = res.Message;
+        this.errorMessage = null;
+
+        form.resetForm();
+        setTimeout(() => {
+          this.successMessage = null;
+        }, 5000);
       },
       error: (err) => {
-        alert('Error: ' + err.error?.errorMessage || 'Unknown error');
+        this.errorMessage = err.error?.errorMessage || 'Erro desconhecido';
+        this.successMessage = null;
+
+        setTimeout(() => (this.errorMessage = null), 5000);
       },
     });
   }
