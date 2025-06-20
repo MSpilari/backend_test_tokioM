@@ -1,4 +1,13 @@
-<form (ngSubmit)="submit()" #form="ngForm" class="row g-3" novalidate>
+<div *ngIf="successMessage" class="alert alert-success" role="alert">
+  {{ successMessage }}
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+  {{ errorMessage }}
+</div>
+
+
+<form (ngSubmit)="submit(form)" #form="ngForm" class="row g-3" novalidate>
     
     <!-- Conta de Origem -->
     <div class="col-md-6">
