@@ -13,7 +13,7 @@ export class TransferService {
   constructor(private http: HttpClient) {}
 
   makeTransfer(transfer: TransferRequest): Observable<any> {
-    return this.http.post(`${this.apiUrl}/make`, transfer);
+    return this.http.post(`${this.apiUrl}/`, transfer);
   }
 
   getTransfers(): Observable<TransferResponse[]> {
