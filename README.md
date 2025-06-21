@@ -31,7 +31,7 @@ O backend será iniciado em `http://localhost:8080`.
 
 ### Endpoints principais
 
-- `POST /transfers/make` — Agendar uma nova transferência.
+- `POST /transfers/` — Agendar uma nova transferência.
 - `GET /transfers/` — Listar todas as transferências.
 
 ### Testes
